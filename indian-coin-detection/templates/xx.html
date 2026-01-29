@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Coin Detector AI</title>
+    <link rel="stylesheet" href="https://i.pinimg.com/736x/ec/5f/5b/ec5f5b300aa630b757a2a50b1921ccbf.jpg ">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #222;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #333;
+            padding: 10px;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        .nav-links li {
+            margin: 0 15px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: url('bg.jpg') center/cover no-repeat;
+            color: white;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .btn {
+            background: #ff9800;
+            padding: 10px 20px;
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #e68900;
+        }
+        .coins {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 50px;
+            flex-wrap: wrap;
+        }
+        .coin-card {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+            color: white;
+            width: 250px;
+        }
+        .coin-card img {
+            width: 100%; 
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .coin-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+        }
+        footer {
+            background: #333;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <h1>About Coin Detector AI</h1>
+</header>
+
+<!-- Navbar -->
+<nav>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#coins">Coins</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero">
+    <h1>Discover the Rich History of Indian Coins</h1>
+    <p>Explore centuries of numismatic heritage</p>
+    <a href="#coins" class="btn">Explore Now</a>
+</div>
+
+<!-- Coins Section -->
+<section id="coins" class="coins">
+    <div class="coin-card">
+        <img src="https://th.bing.com/th/id/OIP.JHbDb1-juW6ebZiJUi9HGQHaHa?rs=1&pid=ImgDetMain" alt="Ancient Coin">
+        <h2>Ancient Coin</h2>
+        <p>Details about this coin.</p>
+    </div>
+    <div class="coin-card">
+        <img src="https://img.ma-shops.com/cdma/pic/combined512358.jpg" alt="Medieval Coin">
+        <h2>Medieval Coin</h2>
+        <p>Details about this coin.</p>
+    </div>
+    <div class="coin-card">
+        <img src="https://i.etsystatic.com/10624150/r/il/b51753/1828216600/il_794xN.1828216600_3di3.jpg" alt="Modern Coin">
+        <h2>Modern Coin</h2>
+        <p>Details about this coin.</p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Coin Detector AI. create by Ganesh Gole😎.</p>
+</footer>
+
+<!-- JS for Hover Effect -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const cards = document.querySelectorAll(".coin-card");
+        cards.forEach(card => {
+            card.addEventListener("mouseover", () => {
+                card.style.boxShadow = "0 10px 20px rgba(255,255,255,0.3)";
+            });
+            card.addEventListener("mouseleave", () => {
+                card.style.boxShadow = "0 0 10px rgba(255,255,255,0.2)";
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

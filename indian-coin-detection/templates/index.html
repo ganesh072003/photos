@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <a href="main.html"></a>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Coin Counter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #FF4E50, #1E90FF);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .frame {
+            background: rgba(255, 255, 255, 0.1);
+            border: 5px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        video, canvas {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #FF4E50, #1E90FF);
+            color: #fff;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-top: 12px;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.3s ease;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #FF7E5F, #87CEFA);
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 10px auto;
+        }
+
+        #results {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+
+        .result-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+  <a href="/main" class="btn">Return To Home Page</a> <br><br><br>
+<style>
+    .btn {
+        display: inline-block;
+        padding: 14px 28px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(45deg, #ff0000, #00d4ff);
+        border: none;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.4s ease-in-out;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn:hover {
+        background: linear-gradient(45deg, #00d4ff, #ff0000);
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn:active {
+        transform: scale(0.95);
+    }
+</style>
+
+
+
+    <div class="frame">
+        <h1>Indian Coin Counter</h1>
+        <div class="container">
+            <h2>Camera Capture</h2>
+            <video id="video" autoplay playsinline></video>
+            <button id="captureButton"><i class="fas fa-camera"></i> Capture</button>
+            <canvas id="canvas"></canvas>
+            <button id="detectFromCapture"><i class="fas fa-search"></i> Detect Coins</button>
+
+            <h2>Upload Image</h2>
+            <form id="upload-form" enctype="multipart/form-data">
+                <input type="file" id="file" name="file" accept="image/*" capture="environment">
+                <button type="submit"><i class="fas fa-upload"></i> Detect Coins</button>
+            </form>
+        </div>
+
+        <div id="results" class="container">
+            <h2>Results</h2>
+            <p class="result-text">Coin Count: <span id="coin-count">0</span></p>
+            <p class="result-text">Total Value: ₹<span id="total-value">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const captureButton = document.getElementById('captureButton');
+        const detectFromCaptureButton = document.getElementById('detectFromCapture');
+        const context = canvas.getContext('2d');
+
+        // Access the camera
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Error accessing the camera:', error);
+            });
+
+        // Capture image from the video feed
+        captureButton.addEventListener('click', () => {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        });
+
+        // Detect coins from the captured image
+        detectFromCaptureButton.addEventListener('click', async () => {
+            canvas.toBlob(async (blob) => {
+                await detectCoins(blob);
+            }, 'image/png');
+        });
+
+        // Handle image upload form
+        const form = document.getElementById("upload-form");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const fileInput = document.getElementById("file");
+            const formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+
+            const response = await fetch("/detect_coins", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+            displayResults(data);
+        });
+
+        // Reusable function to detect coins
+        async function detectCoins(imageBlob) {
+            const formData = new FormData();
+            formData.append("file", imageBlob, "captured-image.png");
+
+            const response = await fetch("/detect_coins", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+            displayResults(data);
+        }
+
+        // Function to display results
+        function displayResults(data) {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                document.getElementById("coin-count").textContent = data.coin_count;
+                document.getElementById("total-value").textContent = data.total_value;
+            }
+        }
+    </script>
+</body>
+</html>

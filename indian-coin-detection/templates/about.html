@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Coin India</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: #444;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+        .nav-links li {
+            margin: 0 15px;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .hero {
+            text-align: center;
+            padding: 50px;
+            background: url('https://images.picxy.com/cache/2020/7/14/14f3d51e9f4550c8b1dffe03eb12d6ca.webp') no-repeat center center/cover;
+            color: white;
+        }
+        .btn {
+            background: #ff9800;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .coins {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 50px;
+        }
+        .coin-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .coin-card:hover {
+            transform: scale(1.05);
+        }
+        .coin-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Coin India</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#coins">Coins</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <h1>Discover the Rich History of Indian Coins</h1>
+            <p>Explore centuries of numismatic heritage</p>
+            <a href="/xx" class="btn">Explore Now</a>
+        </div>
+    </header>
+
+    <section id="coins" class="coins">
+        <div class="coin-card">
+            <img src="https://th.bing.com/th/id/OIP.JHbDb1-juW6ebZiJUi9HGQHaHa?rs=1&pid=ImgDetMain" alt="Ancient Coin">
+            <h2>Ancient Coin</h2>
+            <p>Details about this coin.</p>
+        </div>
+        <div class="coin-card">
+            <img src="https://img.ma-shops.com/cdma/pic/combined512358.jpg" alt="Medieval Coin">
+            <h2>Medieval Coin</h2>
+            <p>Details about this coin.</p>
+        </div>
+        <div class="coin-card">
+            <img src="https://i.etsystatic.com/10624150/r/il/b51753/1828216600/il_794xN.1828216600_3di3.jpg" alt="Modern Coin">
+            <h2>Modern Coin</h2>
+            <p>Details about this coin.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; Owber By Ganesh Gole😎.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cards = document.querySelectorAll(".coin-card");
+            cards.forEach(card => {
+                card.addEventListener("mouseover", () => {
+                    card.style.boxShadow = "0 10px 20px rgba(0,0,0,0.3)";
+                });
+                card.addEventListener("mouseleave", () => {
+                    card.style.boxShadow = "0 0 10px rgba(0,0,0,0.1)";
+                });
+            });
+        });
+    </script>
+
+<script>
+    function startDetection() {
+        console.log("Coin detection started!");
+        window.location.href = "/xx"; // Redirect to about.html
+    }
+</script>
+
+
+</body>
+</html>
